@@ -1,0 +1,19 @@
+---
+    apiVersion: helm.fluxcd.io/v1
+    kind: HelmRelease
+    metadata:
+      name: nginx-ingress-dev
+      namespace: dev
+      annotations:
+        fluxcd.io/automated: "true"
+        filter.fluxcd.io/chart-image: glob:dev-*
+    spec:
+      releaseName: nginx-ingress-dev
+      chart:
+        repository: https://kubernetes-charts.storage.googleapis.com/
+        name: nginx-ingress
+        version: 1.37.0
+      values:
+        replicaCount: 2
+        hpa:
+          enabled: false
