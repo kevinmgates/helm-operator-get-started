@@ -17,7 +17,7 @@ spec:
     image:
       repository: kevinmgates/podinfo
       tag: dev-0.5.0
-    replicaCount: 1
+    replicaCount: 3
     hpa:
       enabled: false
     ingress:
