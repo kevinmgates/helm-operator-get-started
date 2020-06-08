@@ -3,7 +3,7 @@
     kind: HelmRelease
     metadata:
       name: nginx-ingress-dev
-      namespace: dev
+      namespace: nginx-ingress
       annotations:
         fluxcd.io/automated: "true"
         filter.fluxcd.io/chart-image: glob:dev-*
