@@ -1,26 +1,18 @@
----
-    apiVersion: helm.fluxcd.io/v1
-    kind: HelmRelease
-    metadata:
-      name: nginx-ingress-dev
-      namespace: nginx-ingress
-      annotations:
-        fluxcd.io/automated: "true"
-        filter.fluxcd.io/chart-image: glob:dev-*
-    spec:
-      releaseName: nginx-ingress-dev
-      chart:
-        repository: https://kubernetes-charts.storage.googleapis.com/
-        name: nginx-ingress
-        version: 1.37.0
-      values:
-        replicaCount: 2
-        hpa:
-          enabled: false
-        ingress:
-          enabled: true
-          annotations:
-            kubernetes.io/ingress.class: nginx
-          hosts:
-            - host: myapp.52.184.204.95.nip.io
-              paths: ["/"]
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: nginx-ingress-dev
+  namespace: ingress-nginx
+  annotations:
+    fluxcd.io/ignore: "false"
+spec:
+  releaseName: nginx-ingress-dev
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    name: nginx-ingress
+    version: 1.37.0
+  values:
+    controller:
+      service:
+        annotations:
+          service.beta.kubernetes.io/azure-load-balancer-internal: "true"
